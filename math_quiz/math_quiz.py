@@ -75,9 +75,13 @@ def math_quiz():
 
         PROBLEM, ANSWER = calculator(number1, number2, operator)
         print(f"\nQuestion: {PROBLEM}")
-        useranswer = input("Your answer: ")
-        useranswer = int(useranswer)
-    
+
+        try:
+            useranswer = int(input("Your answer: "))
+        except ValueError:
+            print("Invalid input! Please enter an integer.")
+            continue  # Start next round if user input is invalid
+
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
             score += 1  #if the answer of the user is correct the score is increased by 1
