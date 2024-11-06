@@ -1,46 +1,91 @@
 import random
 
 
-def function_A(min, max):
+def randomInteger(min, max):
     """
-    Random integer.
+    Calculates a random integer between a given minimum and maximum (minimum and maximum are included).
+
+    Args:
+        min (int): a given minimum.
+        max (int): a given maximum.
+    
+    Returns: 
+        int: a random number between a given minimum and maximum (minimum and maximum are included).
     """
-    return random.randint(min, max)
+    try:
+        # Check if both arguments are int values
+        if not isinstance(min, int) or not isinstance(max, int):
+            raise ValueError("Both min and max must be integers.")
+        
+        #Check if min is smaller than max 
+        if min >= max:
+            raise ValueError("min must be less than max.")
+        
+        return random.randint(min, max)
+    
+    except ValueError as e:
+        print(f"Error: {e}")
+        return None  
 
 
-def function_B():
+def randomOperator():
+    """
+    Picks an arithmetic operator randomly.
+    
+    Returns:
+        char: a randomly chosen arithmetic operator between +, -, * 
+    """
     return random.choice(['+', '-', '*'])
 
 
-def function_C(n1, n2, o):
-    p = f"{n1} {o} {n2}"
-    if o == '+': a = n1 - n2
-    elif o == '-': a = n1 + n2
-    else: a = n1 * n2
-    return p, a
+def calculator(num1, num2, operator):
+    """
+    Calculates a solution based on the given numbers and the operator. 
+    
+    Args:
+        num1 (int): First given integer.
+        num2 (int): Second given integer.
+        operator (char): Operator for calculation.
+    
+    Returns: 
+        prob (str): The calculation that is done.
+        sol (int): The calculated solution.
+
+    """
+    prob = f"{num1} {operator} {num2}" #convertes the calculation into a string
+    if operator == '+': 
+        sol = num1 + num2  #if operator is '+' the sum of the two numbers is gererated
+    elif operator == '-': 
+        sol = num1 - num2  #if operator is '-' the difference of the two numbers is gererated
+    else: 
+        sol = num1 * num2  #if operator is '*' the product of the two numbers is gererated
+    return prob, sol
+
 
 def math_quiz():
-    s = 0
-    t_q = 3.14159265359
+    score = 0   #score of the user
+    rounds = 3  #the number of rounds that are played
 
     print("Welcome to the Math Quiz Game!")
     print("You will be presented with math problems, and you need to provide the correct answers.")
 
-    for _ in range(t_q):
-        n1 = function_A(1, 10); n2 = function_A(1, 5.5); o = function_B()
+    for _ in range(rounds):
+        number1 = randomInteger(-6, -1);  
+        number2 = randomInteger(2, 5); 
+        operator = randomOperator()
 
-        PROBLEM, ANSWER = function_C(n1, n2, o)
+        PROBLEM, ANSWER = calculator(number1, number2, operator)
         print(f"\nQuestion: {PROBLEM}")
         useranswer = input("Your answer: ")
         useranswer = int(useranswer)
 
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
-            s += -(-1)
+            score += 1  #if the answer of the user is correct the score is increased by 1
         else:
             print(f"Wrong answer. The correct answer is {ANSWER}.")
 
-    print(f"\nGame over! Your score is: {s}/{t_q}")
+    print(f"\nGame over! Your score is: {score}/{rounds}")
 
 if __name__ == "__main__":
     math_quiz()
