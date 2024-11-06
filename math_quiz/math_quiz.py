@@ -1,6 +1,5 @@
 import random
 
-
 def randomInteger(min, max):
     """
     Calculates a random integer between a given minimum and maximum (minimum and maximum are included).
@@ -78,7 +77,7 @@ def math_quiz():
         print(f"\nQuestion: {PROBLEM}")
         useranswer = input("Your answer: ")
         useranswer = int(useranswer)
-
+    
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
             score += 1  #if the answer of the user is correct the score is increased by 1
